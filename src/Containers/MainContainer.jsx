@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Home from './../Screens/Home/Home'
+import SearchAnime from './../Screens/SearchAnime/SearchAnime'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function MainContainer() {
   const [anime, setAnime] = useState([]);
@@ -26,7 +28,10 @@ export default function MainContainer() {
   
   return (
     <div>
-      <Home/>
+      <Routes>
+        <Route path='/' element={<Home/>} exact/>
+        <Route path='/search_anime' element={ <SearchAnime/>} exact/>
+      </Routes>
     </div>
   )
 }
