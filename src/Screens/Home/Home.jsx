@@ -2,6 +2,11 @@ import { Flex, Spacer, Button, Center, Text, Box } from '@chakra-ui/react'
 
 export default function Home() {
 
+  function goToAddPage() {
+    // To turn into an actual function once Add Page is completed
+    console.log('the button works!')
+  }
+
   return (
     <>
     <Flex bg='#FFBCB3' h='90vh' align='center' flexDirection='column'>
@@ -12,7 +17,7 @@ export default function Home() {
           </Flex>
         </Box>
         <Box pt='24px'>
-          <Button colorScheme='orange' size='lg'>Add some Anime here!</Button>
+          <Button onClick={goToAddPage} colorScheme='orange' size='lg'>Add some Anime here!</Button>
           </Box>
     </Flex>
     </>
