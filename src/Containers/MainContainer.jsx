@@ -10,7 +10,6 @@ export default function MainContainer() {
 
   useEffect(() => {
     axios.get('https://api.jikan.moe/v4/anime').then((response) => {
-      console.log(response);
       setAnime(response.data);
     }).catch((err) => {
       console.log(`You couldn't catch any anime, because we have a ${err} error`);
@@ -19,7 +18,6 @@ export default function MainContainer() {
 
   useEffect(() => {
     axios.get('https://api.jikan.moe/v4/random/anime').then((response => {
-      console.log(response);
       setRandomAnime(response.data);
     })).catch((err) => {
       console.log(`You sure you want some random anime? You have an error of ${err}`)
@@ -30,7 +28,7 @@ export default function MainContainer() {
     <div>
       <Routes>
         <Route path='/' element={<Home/>} exact/>
-        <Route path='/search_anime' element={ <SearchAnime/>} exact/>
+        <Route path='/search_anime' element={ <SearchAnime anime={anime}/>} exact/>
       </Routes>
     </div>
   )
