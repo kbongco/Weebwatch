@@ -15,39 +15,38 @@ export default function SearchAnime() {
     setSearchedAnime(searchedAnime);
   }
 
-  useEffect(() => {
-    axios.get(`https://api.jikan.moe/v4/anime?q=${searchedAnime}`).then((response) => {
-      console.log(response);
-      console.log(searchedAnime);
-      setSearchedAnime(response.data);
-    }).catch((err) => {
-      console.log(`You got an error, ${err}`)
-      console.log(err);
-    })
-  }, []); 
+  const resetField = (e) => {
+    e.preventDefault();
+    setSearchedAnime('');
+    console.log('reset!')
+  }
 
-  // useEffect(() => {
-  //   const animeResults = searchedAnime?.data?.filter((animes) => {
-  //     console.log(searchedAnime);
-  //     // console.log(animes);
-  //     // console.log(animes.title);
-  //     return animes.title.includes(searchedAnime);
-  //   });
+  const handleClick = async () => {
+    try {
+      console.log('this is working!')
+      axios.get(`https://api.jikan.moe/v4/anime?q=${searchedAnime}`).then((response) => {
+        setAnimeResults(response.data);
+      })
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
 
-  //   // console.log(animeResults);
-  //   setAnimeResults(animeResults);
-  // }, [searchedAnime]);
 
   return (
     <>
       <Flex ht='10vh' justify='center' flexDirection='column'>
         <Box pt='64px'>
           <Text>Search to add</Text>
-          <Input width='auto' onChange={ (e) => searchAnime(e.target.value)} />
+          <Input width='auto' onChange={(e) => searchAnime(e.target.value)} />
+          <button onClick={handleClick}>Search </button>
+          <button onClick={resetField}>Clear</button>
         </Box>
         {animeResults?.length === 0 ? <Box>
           <h1>The anime you are looking for does not exist? </h1>
-        </Box> : <Box mt='64px'>{animeResults?.title}</Box>}
+        </Box> : <Box mt='64px'>{animeResults.data.map((anime) => <ol>
+          <li key={anime.mal_id}>{anime.title}</li>
+        </ol>)}</Box>}
       </Flex>
     </>
 )
