@@ -5,16 +5,18 @@ import SearchAnime from './../Screens/SearchAnime/SearchAnime'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function MainContainer() {
-  const [anime, setAnime] = useState([]);
+  // const [anime, setAnime] = useState([]);
   const [randomAnime, setRandomAnime] = useState([]);
+  const [searchedAnime, setSearchedAnime] = useState([]);
+  
 
-  useEffect(() => {
-    axios.get('https://api.jikan.moe/v4/anime').then((response) => {
-      setAnime(response.data);
-    }).catch((err) => {
-      console.log(`You couldn't catch any anime, because we have a ${err} error`);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get('https://api.jikan.moe/v4/anime').then((response) => {
+  //     setAnime(response.data);
+  //   }).catch((err) => {
+  //     console.log(`You couldn't catch any anime, because we have a ${err} error`);
+  //   });
+  // }, []);
 
   useEffect(() => {
     axios.get('https://api.jikan.moe/v4/random/anime').then((response => {
@@ -23,12 +25,14 @@ export default function MainContainer() {
       console.log(`You sure you want some random anime? You have an error of ${err}`)
     })
   }, []);
+
+
   
   return (
     <div>
       <Routes>
         <Route path='/' element={<Home/>} exact/>
-        <Route path='/search_anime' element={ <SearchAnime anime={anime}/>} exact/>
+        <Route path='/search_anime' element={ <SearchAnime/>} exact/>
       </Routes>
     </div>
   )
