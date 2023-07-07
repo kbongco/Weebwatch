@@ -71,9 +71,12 @@ export default function SearchAnime() {
                       <Image alignSelf='center' boxSize='150px' src={anime.images.jpg.large_image_url} />
                       {showAnimeDetails ? anime.synopsis : `${anime.synopsis.substring(0, 226)}`}
                     </Flex>
+                    <Flex justify='end'>
                     <button onClick={() => setAnimeDetails(!showAnimeDetails)}>
                       {!showAnimeDetails ? 'Show More' : 'Show Less'}
-                    </button>
+                      </button>
+                    <button p='8px'>Add to your list</button>
+                    </Flex>
     </AccordionPanel>
                 </AccordionItem>
               </Accordion>
