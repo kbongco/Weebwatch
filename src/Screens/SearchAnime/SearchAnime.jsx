@@ -9,6 +9,8 @@ import axios from "axios";
 export default function SearchAnime() {
   const [searchedAnime, setSearchedAnime] = useState("");
   const [animeResults, setAnimeResults] = useState([]);
+  const [showAnimeDetails, setAnimeDetails] = useState(false);
+
   const handleChange = (e) => {
     setSearchedAnime(e.target.value);
   };
@@ -67,8 +69,9 @@ export default function SearchAnime() {
                   <AccordionPanel pb={4}>
                     <Flex gap='20px'>
                       <Image alignSelf='center' boxSize='150px' src={anime.images.jpg.large_image_url} />
-                      {anime.synopsis}
+                      {showAnimeDetails ? anime.synopsis : `${anime.synopsis.substring(0, 226)}`}
                     </Flex>
+                    {anime.synopsis.length > 220 ? <button onClick={() => setAnimeDetails(true)}>Show More</button> : <button onClick={() => setAnimeDetails(false)}>Show less</button>}
     </AccordionPanel>
                 </AccordionItem>
               </Accordion>
