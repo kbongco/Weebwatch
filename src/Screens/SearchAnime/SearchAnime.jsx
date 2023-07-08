@@ -1,15 +1,11 @@
-import { Box, Text, Input, Flex, Image,   Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon } from "@chakra-ui/react";
+import { Box, Text, Input, Flex,} from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import AnimeAccordion from "../../Components/Accordion";
 
 export default function SearchAnime() {
   const [searchedAnime, setSearchedAnime] = useState("");
   const [animeResults, setAnimeResults] = useState([]);
-  const [showAnimeDetails, setAnimeDetails] = useState(false);
 
   const handleChange = (e) => {
     setSearchedAnime(e.target.value);
@@ -40,13 +36,19 @@ export default function SearchAnime() {
     }
   };
 
+  const useEnter = (e) => {
+    if (e.key === 13) {
+      handleClick();
+    }
+  }
+
   return (
     <>
       <Flex ht="10vh" justify="center" flexDirection="column">
         <Box pt="64px">
           <Text>Search to add</Text>
-          <Input width="auto" onChange={(e) => searchAnime(e.target.value)} />
-          <button onClick={handleClick}>Search </button>
+          <Input width="auto" onChange={(e) => searchAnime(e.target.value)} onKeyDown={useEnter} />
+          <button onClick={handleClick} onKeyDown={useEnter}>Search </button>
           <button onClick={resetField}>Clear</button>
         </Box>
         {animeResults?.length === 0 ? (
@@ -54,34 +56,7 @@ export default function SearchAnime() {
             <h1>The anime you are looking for does not exist? </h1>
           </Box>
         ) : (
-          <Box mt="24px">
-            {animeResults.data.map((anime) => (
-              <Accordion key={anime.mal_id} allowToggle>
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton>
-                      <Box as="span" flex="1" textAlign="left">
-                        {anime.title}
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>
-                    <Flex gap='20px'>
-                      <Image alignSelf='center' boxSize='150px' src={anime.images.jpg.large_image_url} />
-                      {showAnimeDetails ? anime.synopsis : `${anime.synopsis.substring(0, 226)}`}
-                    </Flex>
-                    <Flex justify='end'>
-                    <button onClick={() => setAnimeDetails(!showAnimeDetails)}>
-                      {!showAnimeDetails ? 'Show More' : 'Show Less'}
-                      </button>
-                    <button p='8px'>Add to your list</button>
-                    </Flex>
-    </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-            ))}
-          </Box>
+            <AnimeAccordion animeResults={animeResults} />
         )}
       </Flex>
     </>
