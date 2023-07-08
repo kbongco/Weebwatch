@@ -5,12 +5,21 @@ import {
   AccordionPanel,
   AccordionIcon, Image, Box, Flex
 } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 
 import React, { useState } from "react";
+import AnimeModal from '../Components/Modal/Modal'
 
 
 export default function AnimeAccordion(props) {
   const [showAnimeDetails, setAnimeDetails] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  // const openModal = () => {
+  //   setShowModal(!showModal);
+  //   console.log('yes')
+  // }
 
   return (
     <Box mt="24px">
@@ -34,12 +43,13 @@ export default function AnimeAccordion(props) {
             <button onClick={() => setAnimeDetails(!showAnimeDetails)}>
               {!showAnimeDetails ? 'Show More' : 'Show Less'}
               </button>
-            <button p='8px'>Add to your list</button>
+              <button onClick={onOpen}p='8px'>Add to your list</button>
             </Flex>
 </AccordionPanel>
         </AccordionItem>
       </Accordion>
     ))}
+      {showModal ? <AnimeModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> : ''}
   </Box>
   )
 }
