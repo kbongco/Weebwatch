@@ -1,7 +1,7 @@
 import { Modal,ModalOverlay, ModalContent, ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton, Box, Flex, ButtonGroup, Button
+  ModalCloseButton, Box, Flex, Button
 } from '@chakra-ui/react'
 
 export default function AnimeModal(props) {
@@ -9,11 +9,11 @@ export default function AnimeModal(props) {
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Adding to your list</ModalHeader>
+        <ModalHeader>{props.addingAnimeTitle}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box p='24px'>
-            You are about to add this anime to your list, are you sure you want to do this? 
+            {props.addingAnimeVerification}
           </Box>
           <Flex p='24px'>
             <Flex justify='center'>

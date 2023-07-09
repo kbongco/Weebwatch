@@ -46,7 +46,7 @@ export default function AnimeAccordion(props) {
         </AccordionItem>
       </Accordion>
     ))}
-      {showModal ? <AnimeModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> : ''}
+      {showModal ? <AnimeModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} addingAnimeTitle={addingAnimeTitle} addingAnimeVerification={addingAnimeVerification} /> : ''}
   </Box>
   )
 }
