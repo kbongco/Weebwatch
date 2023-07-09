@@ -15,11 +15,8 @@ export default function AnimeAccordion(props) {
   const [showAnimeDetails, setAnimeDetails] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  // const openModal = () => {
-  //   setShowModal(!showModal);
-  //   console.log('yes')
-  // }
+  const addingAnimeTitle = 'Adding to your list';
+  const addingAnimeVerification = 'You are about to add this anime to your list are you sure you want to do this? '
 
   return (
     <Box mt="24px">

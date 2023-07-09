@@ -1,11 +1,7 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
+import { Modal,ModalOverlay, ModalContent, ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
+  ModalCloseButton, Box, Flex, ButtonGroup, Button
 } from '@chakra-ui/react'
 
 export default function AnimeModal(props) {
@@ -13,10 +9,18 @@ export default function AnimeModal(props) {
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader>Adding to your list</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          This is a test of the modal, this is only a test
+          <Box p='24px'>
+            You are about to add this anime to your list, are you sure you want to do this? 
+          </Box>
+          <Flex p='24px'>
+            <Flex justify='center'>
+              <Button colorScheme='blue' m='8px'>Add to my List</Button>
+              <Button colorScheme='red' m='8px'>No, thank you</Button>
+            </Flex>
+          </Flex>
         </ModalBody>
       </ModalContent>
     </Modal>
