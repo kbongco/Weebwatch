@@ -1,12 +1,16 @@
-import { Modal,ModalOverlay, ModalContent, ModalHeader,
+import {
+  Modal, ModalOverlay, ModalContent, ModalHeader,
   ModalFooter,
   ModalBody,
   ModalCloseButton, Box, Flex, Button
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+
 
 export default function AnimeModal(props) {
+  // need to fix props to be more dynamic and not just for adding in anime, but for deleting anime as well.
+
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose}>
+    <Modal isOpen={props.isOpen} onClose={props.closeModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{props.addingAnimeTitle}</ModalHeader>
@@ -17,8 +21,9 @@ export default function AnimeModal(props) {
           </Box>
           <Flex p='24px'>
             <Flex justify='center'>
-              <Button colorScheme='blue' m='8px'>Add to my List</Button>
-              <Button colorScheme='red' m='8px'>No, thank you</Button>
+              <Button colorScheme='blue' m='8px'
+                onClick={props.addToYourList}>{props.addToList}</Button>
+              <Button colorScheme='red' m='8px' onClick={props.onClose}>{props.cancelAdd}</Button>
             </Flex>
           </Flex>
         </ModalBody>
