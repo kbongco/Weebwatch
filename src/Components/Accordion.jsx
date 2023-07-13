@@ -15,11 +15,23 @@ export default function AnimeAccordion(props) {
   const [showAnimeDetails, setAnimeDetails] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [animeName, setAnimeName] = useState('');
+  const [animeImg, setAnimeImg] = useState('');
+  const [animeEpisodes, setAnimeEpisodes] = useState(0);
   const addingAnimeTitle = 'Adding to your list';
-  const addingAnimeVerification = 'You are about to add this anime to your list are you sure you want to do this? '
+  const addingAnimeVerification = 'You are about to add this anime to your list are you sure you want to do this?';
+  const addToList = 'Add to my list';
+  const cancelAdd = 'Cancel adding'
+
+
+  const addToYourList = () => {
+    const { animeName, animeImg, animeEpisodes } = props;
+    console.log('this is a test of props');
+  }
 
   return (
     <Box mt="24px">
+          <button onClick={addToYourList}>RT</button>
     {props.animeResults.data.map((anime) => (
       <Accordion key={anime.mal_id} allowToggle>
         <AccordionItem>
@@ -40,13 +52,13 @@ export default function AnimeAccordion(props) {
             <button onClick={() => setAnimeDetails(!showAnimeDetails)}>
               {!showAnimeDetails ? 'Show More' : 'Show Less'}
               </button>
-              <button onClick={onOpen}p='8px'>Add to your list</button>
+              <button onClick={onOpen} p='8px'>Add to your list</button>
             </Flex>
 </AccordionPanel>
         </AccordionItem>
       </Accordion>
     ))}
-      {showModal ? <AnimeModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} addingAnimeTitle={addingAnimeTitle} addingAnimeVerification={addingAnimeVerification} /> : ''}
+      {!showModal ? <AnimeModal isOpen={isOpen} onOpen={onOpen} addingAnimeVerification={addingAnimeVerification} addingAnimeTitle={addingAnimeTitle} onClose={onClose} addToList={addToList} cancelAdd={cancelAdd} addToYourList={addToYourList} /> : ''}
   </Box>
   )
 }
