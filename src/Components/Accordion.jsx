@@ -25,8 +25,29 @@ export default function AnimeAccordion(props) {
 
 
   const addToYourList = () => {
-    const { animeName, animeImg, animeEpisodes } = props;
+    const storedAnime = {
+      name: animeName,
+      totalEpisodes: animeEpisodes,
+      image: animeImg
+    };
+    localStorage.setItem("storedAnime", JSON.stringify(storedAnime));
+    console.log(storedAnime);
     console.log('this is a test of props');
+    console.log(animeName);
+    console.log(animeEpisodes);
+    console.log(animeImg);
+  }
+
+  const openModal = () => {
+    onOpen();
+  }
+
+  const closeModal = () => {
+    onClose();
+  }
+
+  const setAnimeNames = () => {
+    let filteredName = props.animeResults.data.find((anime) => anime.title);
   }
 
   return (
@@ -52,13 +73,18 @@ export default function AnimeAccordion(props) {
             <button onClick={() => setAnimeDetails(!showAnimeDetails)}>
               {!showAnimeDetails ? 'Show More' : 'Show Less'}
               </button>
-              <button onClick={onOpen} p='8px'>Add to your list</button>
+              <button onClick={() => {
+                openModal();
+                setAnimeName(anime.title);
+                setAnimeImg(anime.images.jpg.image_url);
+                setAnimeEpisodes(anime.episodes);
+              }} p='8px'>Add to your list</button>
             </Flex>
 </AccordionPanel>
         </AccordionItem>
       </Accordion>
     ))}
-      {!showModal ? <AnimeModal isOpen={isOpen} onOpen={onOpen} addingAnimeVerification={addingAnimeVerification} addingAnimeTitle={addingAnimeTitle} onClose={onClose} addToList={addToList} cancelAdd={cancelAdd} addToYourList={addToYourList} /> : ''}
+      {!showModal ? <AnimeModal isOpen={isOpen} onOpen={onOpen} addingAnimeVerification={addingAnimeVerification} addingAnimeTitle={addingAnimeTitle} onClose={onClose} closeModal={closeModal} addToList={addToList} cancelAdd={cancelAdd} addToYourList={addToYourList} /> : ''}
   </Box>
   )
 }

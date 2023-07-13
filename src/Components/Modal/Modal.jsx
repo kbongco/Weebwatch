@@ -7,10 +7,10 @@ import {
 import { useState } from 'react';
 
 export default function AnimeModal(props) {
-  console.log(props);
+  // need to fix props to be more dynamic and not just for adding in anime, but for deleting anime as well.
 
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose}>
+    <Modal isOpen={props.isOpen} onClose={props.closeModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{props.addingAnimeTitle}</ModalHeader>
@@ -23,7 +23,7 @@ export default function AnimeModal(props) {
             <Flex justify='center'>
               <Button colorScheme='blue' m='8px'
                 onClick={props.addToYourList}>{props.addToList}</Button>
-              <Button colorScheme='red' m='8px'>{props.cancelAdd}</Button>
+              <Button colorScheme='red' m='8px' onClick={props.onClose}>{props.cancelAdd}</Button>
             </Flex>
           </Flex>
         </ModalBody>
