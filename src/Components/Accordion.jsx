@@ -6,7 +6,6 @@ import {
   AccordionIcon, Image, Box, Flex
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
-
 import React, { useState } from "react";
 import AnimeModal from '../Components/Modal/Modal'
 
@@ -25,17 +24,16 @@ export default function AnimeAccordion(props) {
 
 
   const addToYourList = () => {
+    let randomNumber = Math.random().toFixed(2);
+    let key = `storedAnime${randomNumber}`;
     const storedAnime = {
       name: animeName,
       totalEpisodes: animeEpisodes,
       image: animeImg
     };
-    localStorage.setItem("storedAnime", JSON.stringify(storedAnime));
-    console.log(storedAnime);
-    console.log('this is a test of props');
-    console.log(animeName);
-    console.log(animeEpisodes);
-    console.log(animeImg);
+    localStorage.setItem(key, JSON.stringify(storedAnime));
+    // will handle duplicate value scenario after user anime page
+    //is set up 
   }
 
   const openModal = () => {
@@ -44,10 +42,6 @@ export default function AnimeAccordion(props) {
 
   const closeModal = () => {
     onClose();
-  }
-
-  const setAnimeNames = () => {
-    let filteredName = props.animeResults.data.find((anime) => anime.title);
   }
 
   return (
