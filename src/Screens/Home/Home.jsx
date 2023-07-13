@@ -1,4 +1,4 @@
-import { Flex, Spacer, Button, Center, Text, Box } from '@chakra-ui/react'
+import { Flex, Button, Text, Box } from '@chakra-ui/react'
 
 export default function Home() {
 
