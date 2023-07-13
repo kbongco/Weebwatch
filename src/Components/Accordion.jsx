@@ -8,6 +8,7 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import React, { useState } from "react";
 import AnimeModal from '../Components/Modal/Modal'
+import { useToast } from '@chakra-ui/react'
 
 
 export default function AnimeAccordion(props) {
@@ -21,6 +22,7 @@ export default function AnimeAccordion(props) {
   const addingAnimeVerification = 'You are about to add this anime to your list are you sure you want to do this?';
   const addToList = 'Add to my list';
   const cancelAdd = 'Cancel adding'
+  const toast = useToast()
 
 
   const addToYourList = () => {
@@ -31,6 +33,15 @@ export default function AnimeAccordion(props) {
       totalEpisodes: animeEpisodes,
       image: animeImg
     };
+    toast({
+      position: 'top',
+      title: 'You added an anime to your list',
+      description: "Check out the list on your page",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
+    closeModal();
     localStorage.setItem(key, JSON.stringify(storedAnime));
     // will handle duplicate value scenario after user anime page
     //is set up 

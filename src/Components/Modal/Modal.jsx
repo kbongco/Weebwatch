@@ -4,7 +4,7 @@ import {
   ModalBody,
   ModalCloseButton, Box, Flex, Button
 } from '@chakra-ui/react';
-import { useState } from 'react';
+
 
 export default function AnimeModal(props) {
   // need to fix props to be more dynamic and not just for adding in anime, but for deleting anime as well.
