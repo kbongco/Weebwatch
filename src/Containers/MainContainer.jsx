@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Home from './../Screens/Home/Home'
 import SearchAnime from './../Screens/SearchAnime/SearchAnime'
+import UserPage from './../Screens/UserPage/UserPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function MainContainer() {
@@ -9,14 +10,6 @@ export default function MainContainer() {
   const [randomAnime, setRandomAnime] = useState([]);
   const [searchedAnime, setSearchedAnime] = useState([]);
   
-
-  // useEffect(() => {
-  //   axios.get('https://api.jikan.moe/v4/anime').then((response) => {
-  //     setAnime(response.data);
-  //   }).catch((err) => {
-  //     console.log(`You couldn't catch any anime, because we have a ${err} error`);
-  //   });
-  // }, []);
 
   useEffect(() => {
     axios.get('https://api.jikan.moe/v4/random/anime').then((response => {
@@ -33,6 +26,7 @@ export default function MainContainer() {
       <Routes>
         <Route path='/' element={<Home/>} exact/>
         <Route path='/search_anime' element={ <SearchAnime/>} exact/>
+        <Route path='/user_anime' element={<UserPage />} exact/>
       </Routes>
     </div>
   )

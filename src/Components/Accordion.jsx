@@ -17,6 +17,7 @@ export default function AnimeAccordion(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [animeName, setAnimeName] = useState('');
   const [animeImg, setAnimeImg] = useState('');
+  const [animeId, setAnimeId] = useState('');
   const [animeEpisodes, setAnimeEpisodes] = useState(0);
   const addingAnimeTitle = 'Adding to your list';
   const addingAnimeVerification = 'You are about to add this anime to your list are you sure you want to do this?';
@@ -27,7 +28,8 @@ export default function AnimeAccordion(props) {
 
   const addToYourList = () => {
     let randomNumber = Math.random().toFixed(2);
-    let key = `storedAnime${randomNumber}`;
+    // let key = `storedAnime${randomNumber}`;
+    let key = animeId;
     const storedAnime = {
       name: animeName,
       totalEpisodes: animeEpisodes,
@@ -83,6 +85,7 @@ export default function AnimeAccordion(props) {
                 setAnimeName(anime.title);
                 setAnimeImg(anime.images.jpg.image_url);
                 setAnimeEpisodes(anime.episodes);
+                setAnimeId(anime.mal_id);
               }} p='8px'>Add to your list</button>
             </Flex>
 </AccordionPanel>
