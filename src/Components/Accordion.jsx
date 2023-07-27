@@ -29,7 +29,7 @@ export default function AnimeAccordion(props) {
   const addToYourList = () => {
     let randomNumber = Math.random().toFixed(2);
     // let key = `storedAnime${randomNumber}`;
-    let key = animeId;
+    let key =`anime-${animeId}`;
     const storedAnime = {
       name: animeName,
       totalEpisodes: animeEpisodes,
@@ -45,8 +45,6 @@ export default function AnimeAccordion(props) {
     })
     closeModal();
     localStorage.setItem(key, JSON.stringify(storedAnime));
-    // will handle duplicate value scenario after user anime page
-    //is set up 
   }
 
   const openModal = () => {
@@ -58,7 +56,7 @@ export default function AnimeAccordion(props) {
   }
 
   return (
-    <Box mt="24px">
+    <Box mt="24px" p='32px'>
           <button onClick={addToYourList}>RT</button>
     {props.animeResults.data.map((anime) => (
       <Accordion key={anime.mal_id} allowToggle>
@@ -77,7 +75,7 @@ export default function AnimeAccordion(props) {
               {showAnimeDetails ? anime.synopsis : `${anime.synopsis.substring(0, 226)}`}
             </Flex>
             <Flex justify='end'>
-            <button onClick={() => setAnimeDetails(!showAnimeDetails)}>
+            <button onClick={() => setAnimeDetails(!showAnimeDetails)} mr='8px'>
               {!showAnimeDetails ? 'Show More' : 'Show Less'}
               </button>
               <button onClick={() => {
